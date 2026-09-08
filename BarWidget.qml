@@ -28,13 +28,29 @@ BarWidget {
 
   readonly property int percent: maxLevel > 0 ? Math.round(level * 100 / maxLevel) : 0
 
-  function applyLevel(value) {
+  // Set the hardware level; `notify` also pops the OSD with the new percent.
+  function setLevel(value, notify) {
     value = Math.max(0, Math.min(root.maxLevel, value))
     root.level = value
     if (root.bar) {
-      root.bar.run("brightnessctl -d " + root.device + " set " + value + " >/dev/null && omarchy-osd -i keyboard -p " + root.percent)
+      var cmd = "brightnessctl -d " + root.device + " set " + value + " >/dev/null"
+      if (notify) cmd += " && omarchy-osd -i keyboard -p " + root.percent
+      root.bar.run(cmd)
       root.bar.run("printf '%s\\n' " + value + " > " + Util.shellQuote(root.stateFile()))
     }
+  }
+
+  function applyLevel(value) {
+    root.setLevel(value, true)
+  }
+
+  // Re-apply the persisted level once the saved state and the real max are both
+  // known. Many laptops boot with the keyboard backlight off, so this restores
+  // last session's brightness; skipped when the level is 0/off.
+  property int startupProbes: 0
+  function maybeApplyStartup() {
+    root.startupProbes++
+    if (root.startupProbes === 2 && root.level > 0) root.setLevel(root.level, false)
   }
 
   function step(delta) {
@@ -61,6 +77,7 @@ BarWidget {
           var n = parseInt(value, 10)
           root.level = Math.max(0, Math.min(root.maxLevel, n))
         }
+        root.maybeApplyStartup()
       }
     }
   }
@@ -74,6 +91,7 @@ BarWidget {
       onStreamFinished: {
         var n = parseInt(String(text || "").trim(), 10)
         if (Number.isFinite(n) && n > 0) root.maxLevel = n
+        root.maybeApplyStartup()
       }
     }
   }
