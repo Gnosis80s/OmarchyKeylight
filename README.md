@@ -2,7 +2,7 @@
 
 A keyboard backlight bar widget for [Omarchy](https://omarchy.org/).
 
-Adds a keyboard-pill to the bar for controlling your laptop keyboard backlight. Left click cycles the brightness up (0 → 1 → … → max → 0); right click cycles it down. A push notification (OSD) shows the new brightness level after each step.
+Adds a keyboard-pill to the bar for controlling your laptop keyboard backlight. Left click cycles the brightness up (0 → 1 → → max → 0); right click cycles it down. A push notification (OSD) shows the new brightness level after each step.
 
 The built-in LED driver reports brightness as 0 even when lit, so the widget can't read the real level back from hardware. Instead it keeps its own last-known level in a file under `XDG_STATE_HOME` and refreshes it on every change — the persisted level survives shell reloads and reboots. The true maximum is probed at load time with `brightnessctl max`, so the cycle covers the full range your keyboard supports. Because many laptops boot with the keyboard backlight off, the persisted level is re-applied automatically when the shell loads.
 
@@ -12,9 +12,6 @@ The active pill as it appears in the bar, next to the power button:
 
 ![Keylight button in the bar](assets/kbd-in-bar.png)
 
-Zoomed in:
-
-![Keyboard backlight button, zoomed](assets/kbd-button.png)
 
 ## Install
 
