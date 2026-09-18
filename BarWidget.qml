@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Effects
 import Quickshell
 import Quickshell.Io
 import qs.Commons
@@ -20,6 +21,16 @@ BarWidget {
   readonly property string device: "asus::kbd_backlight"
   property int level: 0
   property int maxLevel: 3
+
+  // Lit-state icon color. The bar's default active color is the theme's
+  // urgent (orange), which reads as a warning; the backlight is neutral, so
+  // use a light blue glow instead.
+  readonly property color glowColor: "#8fd8ff"
+  // The keyboard exposes three real brightness steps (1 = low … max = high).
+  // Scale the glow with the step so the icon mirrors the physical light:
+  // a dim halo at the lowest level, a bright one at the highest.
+  readonly property real glowStrength: maxLevel > 0 ? level / maxLevel : 0
+  readonly property real glowOpacity: level > 0 ? 0.35 + 0.6 * glowStrength : 0
 
   function stateFile() {
     var dir = Quickshell.env("XDG_STATE_HOME") || Quickshell.env("HOME") + "/.local/state"
@@ -105,8 +116,23 @@ BarWidget {
     bar: root.bar
     text: "󰌌"
     active: root.level > 0
+    activeColor: root.glowColor
     dimmed: root.level === 0
     tooltipText: root.level === 0 ? "Keyboard backlight off" : "Keyboard backlight " + root.level + "/" + root.maxLevel
+    // When lit, run the glyph through a MultiEffect and simulate a glow with a
+    // zero-offset shadow in the lit blue. The shadow opacity tracks the
+    // brightness step, so the halo grows with the real backlight level.
+    layer.enabled: root.level > 0
+    layer.effect: MultiEffect {
+      shadowEnabled: true
+      shadowColor: root.glowColor
+      shadowOpacity: root.glowOpacity
+      shadowBlur: 1.0
+      shadowHorizontalOffset: 0
+      shadowVerticalOffset: 0
+      shadowScale: 1.0
+      blurMax: 12
+    }
     onPressed: function(b) {
       if (b === Qt.LeftButton) root.step(1)
       else if (b === Qt.RightButton) root.step(-1)
