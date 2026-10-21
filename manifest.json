@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "id": "gnosis.kbd-backlight",
   "name": "Keyboard Backlight",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "gnosis",
-  "description": "Toggle the keyboard backlight on or off",
+  "description": "Keyboard backlight control: click, scroll or IPC to step through brightness levels",
   "kinds": [
     "bar-widget"
   ],
@@ -13,7 +13,7 @@
   },
   "barWidget": {
     "displayName": "Keyboard Backlight",
-    "description": "Keyboard backlight on/off toggle",
+    "description": "Keyboard backlight pill: cycle, scroll and toggle brightness",
     "category": "Hardware",
     "allowMultiple": false
   }
