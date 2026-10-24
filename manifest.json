@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "id": "gnosis.kbd-backlight",
-  "name": "Keyboard Backlight",
+  "name": "Keylight",
   "version": "1.1.0",
-  "author": "gnosis",
-  "description": "Keyboard backlight control: click, scroll or IPC to step through brightness levels",
+  "author": "Gnosis80s",
+  "description": "One-click keyboard backlight control for the Omarchy bar: click, scroll or script it, with a glow that shows the level",
   "kinds": [
     "bar-widget"
   ],
@@ -12,8 +12,8 @@
     "barWidget": "BarWidget.qml"
   },
   "barWidget": {
-    "displayName": "Keyboard Backlight",
-    "description": "Keyboard backlight pill: cycle, scroll and toggle brightness",
+    "displayName": "Keylight",
+    "description": "Keyboard backlight icon that glows with the level; click, scroll or middle-click to adjust",
     "category": "Hardware",
     "allowMultiple": false
   }
