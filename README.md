@@ -1,24 +1,24 @@
 # Omarchy Keylight
 
-**Your keyboard backlight, one click away on the Omarchy bar.**
+**Light up your keys. Light up your bar. Never fumble for an Fn combo in the dark again.**
 
-Typing in a dark room and can't remember which Fn combo lights the keys? Keylight puts a small keyboard icon on your [Omarchy](https://omarchy.org/) bar. Click it to brighten the keys, scroll to fine-tune, or middle-click to turn them off. The icon glows brighter as the backlight does, so you can tell the level at a glance.
+You're deep in the zone, the room is dark, and your fingers are hunting for the one Fn key that wakes your keyboard backlight. Keylight ends that. It drops a small keyboard icon on your [Omarchy](https://omarchy.org/) bar, and that icon *is* your backlight: **click** to brighten, **scroll** to fine-tune, **middle-click** to switch off and snap back to your favourite level. As the keys get brighter, the icon glows brighter with them.
 
 ![Keylight on the Omarchy bar](assets/kbd-in-bar.png)
 
 ![The icon's glow at each backlight level: off, low, medium and high](assets/kbd-levels.png)
 
-## Why Keylight
+## Why you'll love it
 
-- **Shows the real level.** The icon is grey when the backlight is off and glows light blue when it's on, brighter with each step. Hover it for the exact level and percentage.
-- **Every control on one icon.** Click steps up, right-click steps down, scroll nudges, and middle-click toggles it off and back to where you had it.
-- **Keeps your level after a reboot.** Many laptops start with the backlight off. Keylight saves your last level and turns it back on when you log in.
-- **Stays correct when you use the Fn keys.** Keylight watches the hardware, so brightness changed from the keyboard shows up on the icon within a second.
-- **Fixes keyboards that hide their level.** Some drivers, such as ASUS `asus-nb-wmi`, always report a brightness of 0. Keylight keeps track of the level itself, so the icon, the steps and the restore after a reboot still work.
-- **Works on most laptops without setup.** It finds the backlight on its own (ASUS, ThinkPad, Dell and other `*kbd_backlight*` devices) and uses every level your keyboard has. If there's no backlight, the icon hides.
-- **Same level on every monitor.** Each monitor's bar shows the same level, whichever one you clicked.
-- **Scriptable.** You can set the backlight from a keybinding or script with `omarchy-shell`, and the icon follows.
-- **Quick to install.** One command installs it, and the bar reloads by itself.
+- **See your backlight at a glance.** Grey when off, a soft blue glow when on, and the glow grows with every step. Hover for the exact level and percentage.
+- **One icon, every control.** Click steps up, right-click steps down, scroll nudges, middle-click toggles. No menus, no hunting.
+- **Wakes up the way you left it.** Many laptops boot with the backlight off. Keylight remembers your last level and brings it back as soon as you log in.
+- **Plays nicely with your Fn keys.** It watches the hardware, so brightness changed from the keyboard shows on the icon within a second.
+- **Rescues "broken" drivers.** Some keyboards, such as ASUS `asus-nb-wmi`, always report a brightness of 0, which stalls the stock brightness keys. Keylight tracks the level itself, so the icon, the steps and the restore all keep working.
+- **Zero setup.** It finds your backlight on its own (ASUS, ThinkPad, Dell and other `*kbd_backlight*` devices) and uses every level your keyboard has. No backlight? The icon quietly hides.
+- **Multi-monitor ready.** Every monitor's bar shows the same level, whichever one you clicked.
+- **Scriptable.** Bind it to any key or script with `omarchy-shell`, and the icon follows along.
+- **One command to install.** The bar reloads on its own, no shell restart.
 
 ## Install
 
