@@ -51,6 +51,9 @@ BarWidget {
   // before the shell started isn't mistaken for a fresh key press.
   property bool hwReadable: false
   property var lastHwChanged: null
+  // Some drivers (e.g. asus-nb-wmi) expose `brightness_hw_changed` but fail every
+  // read; stop polling it after the first failure instead of logging each second.
+  property bool hwChangedUnreadable: false
   // Ignore sysfs reads until our own brightnessctl write has landed, so a poll
   // racing the write can't snap the level back to the old value.
   property real quietUntil: 0
@@ -156,7 +159,7 @@ BarWidget {
   function refresh() {
     if (!root.sysDir) return
     brightnessView.reload()
-    hwChangedView.reload()
+    if (!root.hwChangedUnreadable) hwChangedView.reload()
   }
 
   Component.onCompleted: {
@@ -233,6 +236,7 @@ BarWidget {
     path: root.sysDir ? root.sysDir + "/brightness_hw_changed" : ""
     printErrors: false
     onLoaded: root.onHwChangedRead()
+    onLoadFailed: root.hwChangedUnreadable = true
   }
 
   // sysfs attributes don't raise inotify events, so poll them.
